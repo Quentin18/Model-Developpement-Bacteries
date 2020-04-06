@@ -15,7 +15,9 @@ def main(mu, L, k, m, delta, phase_diag=True):
                     "Développement des bactéries dans un substrat")
     # Les axes
     xaxis = Axis(0, 5, 15j)
-    yaxis = Axis(0, 1, 15j)
+    yaxis = Axis(0, 5, 15j)
+    yaxis1 = Axis(0, 1, 15j, "Concentration de nourriture")
+    yaxis2 = Axis(0, 1, 15j, "Concentration de bactéries")
     taxis = Axis(0, 5, 500)
     # Couleurs et formes
     col = Color()
@@ -30,7 +32,7 @@ def main(mu, L, k, m, delta, phase_diag=True):
     cnds.append((0.75, 0.25), green_dotted)
     # Evolution
     evol = Evolution(str(mdl))
-    evol.plot(mdl, cnds, xaxis, yaxis, taxis, exprtpng=True)
+    evol.plot(mdl, cnds, xaxis, [yaxis1, yaxis2], taxis, exprtpng=False)
     if phase_diag:
         # Portrait des phases
         xaxis = Axis(0, 1, 15j)
@@ -40,4 +42,4 @@ def main(mu, L, k, m, delta, phase_diag=True):
 
 
 if __name__ == "__main__":
-    main(mu=1, L=1, k=1, m=1, delta=1, phase_diag=False)
+    main(mu=1, L=1, k=1, m=1, delta=1, phase_diag=True)

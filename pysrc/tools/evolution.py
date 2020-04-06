@@ -33,20 +33,16 @@ class Evolution:
     def __str__(self):
         return self.title
 
-    def plot(self, modl, cndszr,
-             xaxis, yaxis, taxis,
-             exprtpng=False):
-        # Préparation graphique
-        fig, evol = plt.subplots(figsize=self.figsize)
-
-        # Paramétrages graphiques globaux
-        plt.xlim(xaxis.start, xaxis.end)
-        plt.ylim(yaxis.start, yaxis.end)
-
-        # Paramétrages repère
-        evol.grid(True)
-        evol.set_title(self.title)
-        evol.set(xlabel=xaxis.label, ylabel=yaxis.label)
+    def plot(self, modl, cndszr, xaxis, yaxis, taxis, exprtpng=False):
+        """
+        Représente les composantes du système différentiel
+        en fonction du temps
+        """
+        # Préparation figure et axes
+        fig = plt.figure(1, figsize=self.figsize)
+        ax1 = fig.add_subplot(211)
+        ax2 = fig.add_subplot(212)
+        axes = {ax1: yaxis[0], ax2: yaxis[1]}
 
         # Calcul des trajectoires
         tdisc = np.linspace(taxis.start, taxis.end, taxis.size_subdiv)
@@ -54,10 +50,19 @@ class Evolution:
         for cnd in cndszero:
             cnd0 = cnd.cords
             trj = odeint(modl.get_rhs(), cnd0, tdisc)
-            evol.plot(tdisc, trj[:, 0], cnd.get_style(), label=str(cnd0))
-            evol.plot(tdisc, trj[:, 1], cnd.get_style(), label=str(cnd0))
+            ax1.plot(tdisc, trj[:, 0], cnd.get_style(), label=str(cnd0))
+            ax2.plot(tdisc, trj[:, 1], cnd.get_style(), label=str(cnd0))
 
-        plt.legend()
+        # Paramétrages axes
+        for ax in axes:
+            ax.set_xlim(xaxis.start, xaxis.end)
+            ax.set_ylim(axes[ax].start, axes[ax].end)
+            ax.grid(True)
+            ax.legend()
+            ax.set_title(f"{axes[ax].label} en fonction du temps")
+            ax.set(xlabel="Temps", ylabel=axes[ax].label)
+
+        plt.tight_layout()
         plt.show()
 
         if exprtpng:
