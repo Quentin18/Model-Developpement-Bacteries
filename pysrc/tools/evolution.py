@@ -40,9 +40,9 @@ class Evolution:
         """
         # Préparation figure et axes
         fig = plt.figure(1, figsize=self.figsize)
-        ax1 = fig.add_subplot(211)
-        ax2 = fig.add_subplot(212)
-        axes = {ax1: yaxis[0], ax2: yaxis[1]}
+        nbAxes = len(yaxis)
+        axes = [fig.add_subplot(nbAxes, 1, i + 1) for i in range(nbAxes)]
+        superpose = nbAxes == 1     # Superposition si un seul axe y donné
 
         # Calcul des trajectoires
         tdisc = np.linspace(taxis.start, taxis.end, taxis.size_subdiv)
@@ -50,17 +50,29 @@ class Evolution:
         for cnd in cndszero:
             cnd0 = cnd.cords
             trj = odeint(modl.get_rhs(), cnd0, tdisc)
-            ax1.plot(tdisc, trj[:, 0], cnd.get_style(), label=str(cnd0))
-            ax2.plot(tdisc, trj[:, 1], cnd.get_style(), label=str(cnd0))
+            if superpose:   # Cas superposition
+                for i in range(trj.shape[1]):
+                    axes[0].plot(tdisc, trj[:, i], cnd.get_style(),
+                                 label=str(cnd0))
+            else:           # Cas graphiques séparés
+                i = 0
+                for ax in axes:
+                    ax.plot(tdisc, trj[:, i], cnd.get_style(), label=str(cnd0))
+                    i += 1
 
         # Paramétrages axes
+        i = 0
         for ax in axes:
             ax.set_xlim(xaxis.start, xaxis.end)
-            ax.set_ylim(axes[ax].start, axes[ax].end)
+            ax.set_ylim(yaxis[i].start, yaxis[i].end)
             ax.grid(True)
             ax.legend()
-            ax.set_title(f"{axes[ax].label} en fonction du temps")
-            ax.set(xlabel="Temps", ylabel=axes[ax].label)
+            if superpose:
+                ax.set_title(self.title)
+            else:
+                ax.set_title(f"{yaxis[i].label} en fonction du temps")
+            ax.set(xlabel="Temps", ylabel=yaxis[i].label)
+            i += 1
 
         plt.tight_layout()
         plt.show()
