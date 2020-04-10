@@ -67,9 +67,9 @@ class DynamicModel:
         tdisc = np.linspace(taxis.start, taxis.end, taxis.size_subdiv)
         trj = odeint(self.modl.get_rhs(), cnd0, tdisc)
         p0, = ax.plot(tdisc, trj[:, 0], cndzr.get_style(),
-                      label=self.modl.label1)
+                      label=self.modl.labels[0])
         p1, = ax.plot(tdisc, trj[:, 1], stylebis.get_lineStyle(),
-                      label=self.modl.label2)
+                      label=self.modl.labels[1])
 
         # Paramétrage axe principal
         ax.set_xlim(xaxis.start, xaxis.end)

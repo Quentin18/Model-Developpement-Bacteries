@@ -69,9 +69,10 @@ class Evolution:
             ax.legend()
             if superpose:
                 ax.set_title(self.title)
+                ax.set(xlabel="Temps", ylabel=", ".join(modl.labels))
             else:
-                ax.set_title(f"{yaxis[i].label} en fonction du temps")
-            ax.set(xlabel="Temps", ylabel=yaxis[i].label)
+                ax.set_title(f"{modl.labels[i]} en fonction du temps")
+                ax.set(xlabel="Temps", ylabel=modl.labels[i])
             i += 1
 
         plt.tight_layout()
