@@ -5,13 +5,18 @@ import functools
 
 
 class Bacteries:
-    def __init__(self, mu, L, k, m, delta, title):
+    def __init__(self, mu, L, k, m, delta,
+                 title="Développement des bactéries dans un substrat",
+                 label1="Concentration de nourriture",
+                 label2="Concentration de bactéries"):
         self._mu = mu        # Taux de croissance des bactéries
         self._L = L          # Facteur inhibiteur croissance bactéries
         self._k = k          # Taux d'affinité des bactéries
         self._m = m          # Taux de mortalité des bactéries
         self._delta = delta  # Coefficient de recyclage des cellules
         self._title = title
+        self._label1 = label1
+        self._label2 = label2
 
     @property
     def mu(self):
@@ -60,6 +65,22 @@ class Bacteries:
     @title.setter
     def title(self, value):
         self._title = value
+
+    @property
+    def label1(self):
+        return self._label1
+
+    @label1.setter
+    def label1(self, value):
+        self._label1 = value
+
+    @property
+    def label2(self):
+        return self._label2
+
+    @label2.setter
+    def label2(self, value):
+        self._label2 = value
 
     def __str__(self):
         return f"""{self.title}
