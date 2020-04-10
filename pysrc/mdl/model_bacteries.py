@@ -5,6 +5,7 @@ import functools
 
 
 class Bacteries:
+    """Gestion du modèle de développement des bactéries"""
     def __init__(self, mu, L, k, m, delta,
                  title="Développement des bactéries dans un substrat",
                  labels=["Concentration de nourriture",

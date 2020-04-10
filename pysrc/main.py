@@ -1,13 +1,15 @@
 """
 Modèle de développement des bactéries dans un substrat
 """
+
+
+from mdl.model_bacteries import Bacteries
 from tools.axis import Axis
 from tools.cnds_initiales import Initials, Initial
 from tools.line_style_form import LineStyle, Color, Form
 from tools.phase_diag import PhaseDiag
 from tools.evolution import Evolution
-from mdl.model_bacteries import Bacteries
-from tools.interface import DynamicModel
+from tools.dynamic_model import DynamicModel
 
 
 def main(mu, L, k, m, delta, phase_diag=True):
