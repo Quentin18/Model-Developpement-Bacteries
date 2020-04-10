@@ -41,16 +41,15 @@ class DynamicModel:
         """
         # Préparation figure et axes
         fig, ax = plt.subplots(figsize=self.figsize)
-        plt.subplots_adjust(bottom=0.55, top=0.90)
+        plt.subplots_adjust(bottom=0.50, top=0.90)
 
-        ax_S0 = plt.axes([0.1, 0.45, 0.8, 0.05], facecolor=axcolor)
-        ax_X0 = plt.axes([0.1, 0.40, 0.8, 0.05], facecolor=axcolor)
-
-        ax_mu = plt.axes([0.1, 0.30, 0.8, 0.05], facecolor=axcolor)
-        ax_L = plt.axes([0.1, 0.25, 0.8, 0.05], facecolor=axcolor)
-        ax_k = plt.axes([0.1, 0.20, 0.8, 0.05], facecolor=axcolor)
-        ax_m = plt.axes([0.1, 0.15, 0.8, 0.05], facecolor=axcolor)
-        ax_delta = plt.axes([0.1, 0.10, 0.8, 0.05], facecolor=axcolor)
+        ax_S0 = plt.axes([0.1, 0.40, 0.8, 0.03], facecolor=axcolor)
+        ax_X0 = plt.axes([0.1, 0.35, 0.8, 0.03], facecolor=axcolor)
+        ax_mu = plt.axes([0.1, 0.30, 0.8, 0.03], facecolor=axcolor)
+        ax_L = plt.axes([0.1, 0.25, 0.8, 0.03], facecolor=axcolor)
+        ax_k = plt.axes([0.1, 0.20, 0.8, 0.03], facecolor=axcolor)
+        ax_m = plt.axes([0.1, 0.15, 0.8, 0.03], facecolor=axcolor)
+        ax_delta = plt.axes([0.1, 0.10, 0.8, 0.03], facecolor=axcolor)
 
         # Sliders
         cnd0 = cndzr.cords
