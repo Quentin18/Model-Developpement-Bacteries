@@ -47,7 +47,7 @@ class PhaseDiag:
         # Paramétrages repère
         phases.grid(True)
         phases.set_title(self.title)
-        phases.set(xlabel=xaxis.label, ylabel=yaxis.label)
+        phases.set(xlabel=modl.label1, ylabel=modl.label2)
 
         # Calcul des trajectoires
         tdisc = np.linspace(taxis.start, taxis.end, taxis.size_subdiv)

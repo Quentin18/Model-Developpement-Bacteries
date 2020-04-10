@@ -59,9 +59,9 @@ class DynamicModel:
         s_X0 = Slider(ax_X0, 'X0', 0, 2, valinit=cnd0[1])
         s_mu = Slider(ax_mu, 'Mu', -2, 2, valinit=self.modl.mu)
         s_L = Slider(ax_L, 'L', -2, 2, valinit=self.modl.L)
-        s_k = Slider(ax_k, 'k', -2, 2, valinit=self.modl.k)
+        s_k = Slider(ax_k, 'k', 0, 2, valinit=self.modl.k)
         s_m = Slider(ax_m, 'm', -2, 2, valinit=self.modl.m)
-        s_delta = Slider(ax_delta, 'delta', 0, 2, valinit=self.modl.delta)
+        s_delta = Slider(ax_delta, 'delta', -2, 2, valinit=self.modl.delta)
 
         # Calcul des trajectoires
         tdisc = np.linspace(taxis.start, taxis.end, taxis.size_subdiv)
@@ -125,7 +125,7 @@ class DynamicModel:
         def phasediag(event):
             cnds = Initials()
             cnds.append(cndzr.cords, cndzr.param)
-            diag = PhaseDiag(self.modl.title, figsize=self.figsize)
+            diag = PhaseDiag(figsize=self.figsize)
             diag.portrait(self.modl, cnds, xaxis, yaxis, taxis,
                           exprtpng=False, showfield=True)
 

@@ -16,8 +16,8 @@ def main(mu, L, k, m, delta, phase_diag=True):
     # Les axes
     xaxis = Axis(0, 5, 15j)
     yaxis = Axis(0, 5, 15j)
-    yaxis1 = Axis(0, 1, 15j, "Concentration de nourriture")
-    yaxis2 = Axis(0, 1, 15j, "Concentration de bactéries")
+    yaxis1 = Axis(0, 1, 15j)
+    yaxis2 = Axis(0, 1, 15j)
     taxis = Axis(0, 5, 500)
     # Couleurs et formes
     col = Color()
@@ -74,8 +74,8 @@ def mainDynamic(mu, L, k, m, delta):
     # Le modèle
     mdl = Bacteries(mu, L, k, m, delta)
     # Les axes
-    xaxis = Axis(0, 5, 15j, "Temps")
-    yaxis = Axis(-2, 2, 15j)
+    xaxis = Axis(0, 5, 15j)
+    yaxis = Axis(-5, 5, 15j)
     taxis = Axis(0, 5, 500)
     # Couleurs et formes
     col = Color()
