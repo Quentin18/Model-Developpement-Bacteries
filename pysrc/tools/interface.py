@@ -7,6 +7,8 @@ import numpy as np
 from matplotlib.widgets import Slider, Button
 import matplotlib.pyplot as plt
 from scipy.integrate import odeint
+from tools.phase_diag import PhaseDiag
+from tools.cnds_initiales import Initials
 
 
 class DynamicModel:
@@ -79,13 +81,13 @@ class DynamicModel:
 
         # Fonction pour actualiser le plot
         def update(val):
-            cnd0 = (s_S0.val, s_X0.val)
+            cndzr.cords = (s_S0.val, s_X0.val)
             self.modl.mu = s_mu.val
             self.modl.L = s_L.val
             self.modl.k = s_k.val
             self.modl.m = s_m.val
             self.modl.delta = s_delta.val
-            trj = odeint(self.modl.get_rhs(), cnd0, tdisc)
+            trj = odeint(self.modl.get_rhs(), cndzr.cords, tdisc)
             p0.set_ydata(trj[:, 0])
             p1.set_ydata(trj[:, 1])
             fig.canvas.draw_idle()
@@ -101,7 +103,8 @@ class DynamicModel:
 
         # Reset button
         resetax = plt.axes([0.8, 0.025, 0.1, 0.04])
-        button = Button(resetax, 'Reset', color=axcolor, hovercolor='0.975')
+        resetbutton = Button(resetax, 'Reset', color=axcolor,
+                             hovercolor='0.975')
 
         def reset(event):
             s_S0.reset()
@@ -112,6 +115,20 @@ class DynamicModel:
             s_m.reset()
             s_delta.reset()
 
-        button.on_clicked(reset)
+        resetbutton.on_clicked(reset)
+
+        # Phase diag button
+        phasediagax = plt.axes([0.1, 0.025, 0.2, 0.04])
+        phasediagbutton = Button(phasediagax, 'Diagramme de phases',
+                                 color=axcolor, hovercolor='0.975')
+
+        def phasediag(event):
+            cnds = Initials()
+            cnds.append(cndzr.cords, cndzr.param)
+            diag = PhaseDiag(self.modl.title, figsize=self.figsize)
+            diag.portrait(self.modl, cnds, xaxis, yaxis, taxis,
+                          exprtpng=False, showfield=True)
+
+        phasediagbutton.on_clicked(phasediag)
 
         plt.show()
