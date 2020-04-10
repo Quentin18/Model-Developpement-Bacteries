@@ -11,8 +11,9 @@ from scipy.integrate import odeint
 
 class DynamicModel:
     """Evolution dynamique d’un système autonome"""
-    def __init__(self, modl):
+    def __init__(self, modl, figsize=(10, 6)):
         self._modl = modl
+        self._figsize = figsize
 
     @property
     def modl(self):
@@ -21,6 +22,14 @@ class DynamicModel:
     @modl.setter
     def modl(self, value):
         self._modl = value
+
+    @property
+    def figsize(self):
+        return self._figsize
+
+    @figsize.setter
+    def figsize(self, value):
+        self._figsize = value
 
     def __str__(self):
         return self.title
@@ -31,7 +40,7 @@ class DynamicModel:
         Affiche le modèle avec des sliders pour faire varier les paramètres
         """
         # Préparation figure et axes
-        fig, ax = plt.subplots()
+        fig, ax = plt.subplots(figsize=self.figsize)
         plt.subplots_adjust(bottom=0.55, top=0.90)
 
         ax_S0 = plt.axes([0.1, 0.45, 0.8, 0.05], facecolor=axcolor)
