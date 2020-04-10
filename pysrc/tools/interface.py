@@ -4,7 +4,7 @@ Modèle dynamique du système autonome des bactéries
 
 
 import numpy as np
-from matplotlib.widgets import Slider
+from matplotlib.widgets import Slider, Button
 import matplotlib.pyplot as plt
 from scipy.integrate import odeint
 
@@ -32,16 +32,16 @@ class DynamicModel:
         """
         # Préparation figure et axes
         fig, ax = plt.subplots()
-        plt.subplots_adjust(bottom=0.55)
+        plt.subplots_adjust(bottom=0.55, top=0.90)
 
-        ax_S0 = plt.axes([0.1, 0.40, 0.8, 0.05], facecolor=axcolor)
-        ax_X0 = plt.axes([0.1, 0.35, 0.8, 0.05], facecolor=axcolor)
+        ax_S0 = plt.axes([0.1, 0.45, 0.8, 0.05], facecolor=axcolor)
+        ax_X0 = plt.axes([0.1, 0.40, 0.8, 0.05], facecolor=axcolor)
 
-        ax_mu = plt.axes([0.1, 0.25, 0.8, 0.05], facecolor=axcolor)
-        ax_L = plt.axes([0.1, 0.20, 0.8, 0.05], facecolor=axcolor)
-        ax_k = plt.axes([0.1, 0.15, 0.8, 0.05], facecolor=axcolor)
-        ax_m = plt.axes([0.1, 0.10, 0.8, 0.05], facecolor=axcolor)
-        ax_delta = plt.axes([0.1, 0.05, 0.8, 0.05], facecolor=axcolor)
+        ax_mu = plt.axes([0.1, 0.30, 0.8, 0.05], facecolor=axcolor)
+        ax_L = plt.axes([0.1, 0.25, 0.8, 0.05], facecolor=axcolor)
+        ax_k = plt.axes([0.1, 0.20, 0.8, 0.05], facecolor=axcolor)
+        ax_m = plt.axes([0.1, 0.15, 0.8, 0.05], facecolor=axcolor)
+        ax_delta = plt.axes([0.1, 0.10, 0.8, 0.05], facecolor=axcolor)
 
         # Sliders
         cnd0 = cndzr.cords
@@ -90,5 +90,20 @@ class DynamicModel:
         s_k.on_changed(update)
         s_m.on_changed(update)
         s_delta.on_changed(update)
+
+        # Reset button
+        resetax = plt.axes([0.8, 0.025, 0.1, 0.04])
+        button = Button(resetax, 'Reset', color=axcolor, hovercolor='0.975')
+
+        def reset(event):
+            s_S0.reset()
+            s_X0.reset()
+            s_mu.reset()
+            s_L.reset()
+            s_k.reset()
+            s_m.reset()
+            s_delta.reset()
+
+        button.on_clicked(reset)
 
         plt.show()
