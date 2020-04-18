@@ -88,13 +88,75 @@ def mainS0X0(mu, L, k, m, delta):
     cnds.make_initials(Ls, [0.5], red_solid)
     # Evolution
     evol =Analyse(str(mdl))
-    evol.plot(mdl, cnds, taxis, Ls, 'S0')
+    evol.plotSX(mdl, cnds, taxis, Ls, 'S0')
     Lx = [0.5, 0.6, 0.7, 0.8, 0.9, 1]
     cnds = Initials()
     cnds.make_initials([0.5], Lx, red_solid)
     # Evolution
     evol = Analyse(str(mdl))
-    evol.plot(mdl, cnds, taxis, Lx, 'X0')
+    evol.plotSX(mdl, cnds, taxis, Lx, 'X0')
+
+def mainMu(L, k, m, delta):
+    # Les axes
+    taxis = Axis(0, 10, 500)
+    # Couleurs et formes
+    col = Color()
+    red_solid = LineStyle(col.red())
+    cnds = Initials()
+    epsilon = 0.0001
+    # Evolution
+    cnds.append((0.5, 0.5), red_solid)
+    cnds.append((0.25, 0.75), red_solid)
+    #cnds.append((0.75, 0.25), green_dotted)
+    evol =Analyse("Développement des bactéries dans un substrat")
+    evol.plotMu(L, k, m, delta, cnds, taxis, epsilon)
+
+def mainL(mu, k, m, delta):
+    # Les axes
+    taxis = Axis(0, 10, 500)
+    # Couleurs et formes
+    col = Color()
+    red_solid = LineStyle(col.red())
+    cnds = Initials()
+    epsilon = 0.001
+    # Evolution
+    cnds.append((0.5, 0.5), red_solid)
+    cnds.append((0.25, 0.75), red_solid)
+    #cnds.append((0.75, 0.25), green_dotted)
+    evol =Analyse("Développement des bactéries dans un substrat")
+    evol.plotL(mu, k, m, delta, cnds, taxis, epsilon)
+
+def mainM(mu, L, k, delta):
+    # Les axes
+    taxis = Axis(0, 10, 500)
+    # Couleurs et formes
+    col = Color()
+    red_solid = LineStyle(col.red())
+    cnds = Initials()
+    epsilon = 0.001
+    # Evolution
+    cnds.append((0.5, 0.5), red_solid)
+    cnds.append((0.25, 0.75), red_solid)
+    #cnds.append((0.75, 0.25), green_dotted)
+    evol =Analyse("Développement des bactéries dans un substrat")
+    evol.plotM(mu, L, k, delta, cnds, taxis, epsilon)
+
+def mainDelta(mu, L, k, m):
+    # Les axes
+    taxis = Axis(0, 10, 500)
+    # Couleurs et formes
+    col = Color()
+    red_solid = LineStyle(col.red())
+    cnds = Initials()
+    epsilon = 0.001
+    # Evolution
+    cnds.append((0.5, 0.5), red_solid)
+    cnds.append((0.25, 0.75), red_solid)
+    #cnds.append((0.75, 0.25), green_dotted)
+    evol =Analyse("Développement des bactéries dans un substrat")
+    evol.plotDelta(mu, L, k, m, cnds, taxis, epsilon)
+
+
 
 
 def mainDynamic(mu, L, k, m, delta):
@@ -121,3 +183,7 @@ if __name__ == "__main__":
     #mainSuperpose(mu=1, L=1, k=1, m=1, delta=1, phase_diag=True)
     #mainDynamic(mu=1, L=1, k=1, m=1, delta=1)
     mainS0X0(mu=1, L=1, k=1, m=1, delta=1)
+    mainMu(L=1, k=1, m=1, delta=1)
+    mainL(mu=1, k=1, m=1, delta=1)
+    mainM(mu=1, L=1, k=1, delta=1)
+    mainDelta(mu=1, L=1, k=1, m=1)
