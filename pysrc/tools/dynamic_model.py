@@ -45,7 +45,6 @@ class DynamicModel:
         fig, ax = plt.subplots(figsize=self.figsize)
         plt.subplots_adjust(bottom=0.50, top=0.90)
 
-
         ax_S0 = plt.axes([0.1, 0.40, 0.8, 0.03], facecolor=axcolor)
         ax_X0 = plt.axes([0.1, 0.35, 0.8, 0.03], facecolor=axcolor)
         ax_mu = plt.axes([0.1, 0.30, 0.8, 0.03], facecolor=axcolor)
