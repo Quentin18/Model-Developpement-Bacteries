@@ -54,10 +54,11 @@ class Analyse:
                     tlist.append(tdisc[i])
                     break
                 i += 1
-        fig = plt.figure(1, figsize=self.figsize)
-        plt.plot(ls, tlist)
 
-        plt.suptitle("Temps de croisement entre S et X en fonction de ".join(leg))
-        plt.xlabel(leg)
-        plt.ylabel('Temps')
+        fig, ax = plt.subplots()
+        ax.plot(ls, tlist)
+        plt.xlabel(leg, fontsize=12)
+        plt.ylabel('Temps', fontsize=12)
+        plt.tick_params(labelsize=12)
+        ax.set_title(f"Temps de croisement entre S et X en fonction de {leg}")
         plt.show()
