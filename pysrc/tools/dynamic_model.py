@@ -1,8 +1,6 @@
 """
 Modèle dynamique du système autonome des bactéries
 """
-
-
 import numpy as np
 from matplotlib.widgets import Slider, Button
 import matplotlib.pyplot as plt

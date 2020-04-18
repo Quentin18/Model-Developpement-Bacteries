@@ -11,7 +11,7 @@ from tools.line_style_form import LineStyle, Color, Form
 from tools.phase_diag import PhaseDiag
 from tools.evolution import Evolution
 from tools.dynamic_model import DynamicModel
-from tools.analyse import Analyse
+from tools.analysis import Analysis
 import numpy as np
 
 
@@ -89,7 +89,7 @@ def mainS0X0(mu=1, L=1, k=1, m=1, delta=1):
     cnds = Initials()
     cnds.make_initials(Ls, [0.5], red_solid)
     # Analyse
-    evol = Analyse(mdl.title)
+    evol = Analysis(mdl.title)
     evol.plot_cross(mdl, cnds, taxis, Ls, 'S0')
     Lx = [0.5, 0.6, 0.7, 0.8, 0.9, 1]
     cnds = Initials()
@@ -111,7 +111,7 @@ def mainParams(mu=1, L=1, k=1, m=1, delta=1):
     cnds.append((0.5, 0.5), red_solid)
     cnds.append((0.25, 0.75), red_solid)
     # Analyse
-    evol = Analyse(mdl.title)
+    evol = Analysis(mdl.title)
     epsilon = 0.001
     evol.plot_param(mdl, "mu", np.arange(0, 1, 0.001), cnds, taxis, epsilon)
     evol.plot_param(mdl, "L", np.arange(-1, 2, 0.001), cnds, taxis, epsilon)

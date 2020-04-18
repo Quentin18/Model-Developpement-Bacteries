@@ -1,7 +1,6 @@
 """
 Champs des gradients
 """
-
 import numpy as np
 import pylab as pl
 from tools.line_style_form import Color
