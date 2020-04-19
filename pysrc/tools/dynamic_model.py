@@ -1,5 +1,5 @@
 """
-Modèle dynamique du système autonome des bactéries
+Modèle dynamique d'un système autonome
 """
 import numpy as np
 from matplotlib.widgets import Slider, Button
@@ -43,23 +43,22 @@ class DynamicModel:
         fig, ax = plt.subplots(figsize=self.figsize)
         plt.subplots_adjust(bottom=0.50, top=0.90)
 
-        ax_S0 = plt.axes([0.1, 0.40, 0.8, 0.03], facecolor=axcolor)
-        ax_X0 = plt.axes([0.1, 0.35, 0.8, 0.03], facecolor=axcolor)
-        ax_mu = plt.axes([0.1, 0.30, 0.8, 0.03], facecolor=axcolor)
-        ax_L = plt.axes([0.1, 0.25, 0.8, 0.03], facecolor=axcolor)
-        ax_k = plt.axes([0.1, 0.20, 0.8, 0.03], facecolor=axcolor)
-        ax_m = plt.axes([0.1, 0.15, 0.8, 0.03], facecolor=axcolor)
-        ax_delta = plt.axes([0.1, 0.10, 0.8, 0.03], facecolor=axcolor)
+        axis_params = [
+            plt.axes([0.1, 0.40 - 0.05*i, 0.8, 0.03],
+                     facecolor=axcolor) for i in range(
+                     len(self.modl.params) + len(self.modl.symb))]
 
         # Sliders
         cnd0 = cndzr.cords
-        s_S0 = Slider(ax_S0, 'S0', 0, 2, valinit=cnd0[0])
-        s_X0 = Slider(ax_X0, 'X0', 0, 2, valinit=cnd0[1])
-        s_mu = Slider(ax_mu, 'Mu', -2, 2, valinit=self.modl.mu)
-        s_L = Slider(ax_L, 'L', -2, 2, valinit=self.modl.L)
-        s_k = Slider(ax_k, 'k', 0, 2, valinit=self.modl.k)
-        s_m = Slider(ax_m, 'm', -2, 2, valinit=self.modl.m)
-        s_delta = Slider(ax_delta, 'delta', -2, 2, valinit=self.modl.delta)
+        sliders = {}
+        # Conditions initiales
+        order = len(self.modl.symb)
+        for s, axis in zip(self.modl.symb, axis_params[:order]):
+            sliders[s + '0'] = Slider(
+                axis, s + '0', 0, 2, valinit=cnd0[self.modl.symb.index(s)])
+        # Paramètres
+        for p, axis in zip(self.modl.params, axis_params[order:]):
+            sliders[p] = Slider(axis, p, 0, 2, valinit=self.modl.params[p])
 
         # Calcul des trajectoires
         tdisc = np.linspace(taxis.start, taxis.end, taxis.size_subdiv)
@@ -79,25 +78,20 @@ class DynamicModel:
 
         # Fonction pour actualiser le plot
         def update(val):
-            cndzr.cords = (s_S0.val, s_X0.val)
-            self.modl.mu = s_mu.val
-            self.modl.L = s_L.val
-            self.modl.k = s_k.val
-            self.modl.m = s_m.val
-            self.modl.delta = s_delta.val
-            trj = odeint(self.modl.get_rhs(), cndzr.cords, tdisc)
-            p0.set_ydata(trj[:, 0])
-            p1.set_ydata(trj[:, 1])
-            fig.canvas.draw_idle()
+            cndzr.cords = tuple([sliders[s + '0'].val for s in self.modl.symb])
+            for p in self.modl.params:
+                self.modl.params[p] = sliders[p].val
+            try:
+                trj = odeint(self.modl.get_rhs(), cndzr.cords, tdisc)
+                p0.set_ydata(trj[:, 0])
+                p1.set_ydata(trj[:, 1])
+                fig.canvas.draw_idle()
+            except Exception:
+                pass
 
         # Activation des sliders
-        s_S0.on_changed(update)
-        s_X0.on_changed(update)
-        s_mu.on_changed(update)
-        s_L.on_changed(update)
-        s_k.on_changed(update)
-        s_m.on_changed(update)
-        s_delta.on_changed(update)
+        for s in sliders.values():
+            s.on_changed(update)
 
         # Reset button
         resetax = plt.axes([0.8, 0.025, 0.1, 0.04])
@@ -105,13 +99,8 @@ class DynamicModel:
                              hovercolor='0.975')
 
         def reset(event):
-            s_S0.reset()
-            s_X0.reset()
-            s_mu.reset()
-            s_L.reset()
-            s_k.reset()
-            s_m.reset()
-            s_delta.reset()
+            for s in sliders.values():
+                s.reset()
 
         resetbutton.on_clicked(reset)
 

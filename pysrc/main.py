@@ -119,9 +119,9 @@ def mainParams(mu=1, L=1, k=1, m=1, delta=1):
     evol.plot_diff(mdl, "delta", np.arange(-2, 2, 0.01), cnds, taxis, epsilon)
 
 
-def mainDynamic(mu, L, k, m, delta):
+def mainDynamic(mu=1, L=1, k=1, m=1, delta=1):
     # Le modèle
-    mdl = Bacteries(mu, L, k, m, delta)
+    mdl = Bacteries_2({'mu': mu, 'L': L, 'k': k, 'm': m, 'delta': delta})
     # Les axes
     xaxis = Axis(0, 5, 15j)
     yaxis = Axis(-5, 5, 15j)
@@ -139,8 +139,8 @@ def mainDynamic(mu, L, k, m, delta):
 
 
 if __name__ == "__main__":
-    main(mu=1, L=1, k=1, m=1, delta=1, phase_diag=False)
-    mainSuperpose(mu=1, L=1, k=1, m=1, delta=1, phase_diag=True)
-    mainDynamic(mu=1, L=1, k=1, m=1, delta=1)
-    mainS0X0()
-    mainParams()
+    # main(mu=1, L=1, k=1, m=1, delta=1, phase_diag=False)
+    # mainSuperpose(mu=1, L=1, k=1, m=1, delta=1, phase_diag=True)
+    mainDynamic()
+    # mainS0X0()
+    # mainParams()
