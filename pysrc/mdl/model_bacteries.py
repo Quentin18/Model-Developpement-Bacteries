@@ -9,54 +9,21 @@ class Bacteries:
     def __init__(self, mu, L, k, m, delta,
                  title="Développement des bactéries dans un substrat",
                  labels=["Concentration de nourriture",
-                         "Concentration de bactéries"]):
-        self._mu = mu        # Taux de croissance des bactéries
-        self._L = L          # Facteur inhibiteur croissance bactéries
-        self._k = k          # Taux d'affinité des bactéries
-        self._m = m          # Taux de mortalité des bactéries
-        self._delta = delta  # Coefficient de recyclage des cellules
+                         "Concentration de bactéries"],
+                 symb=["S", "X"]):
+        self._params = None
+        self.make_params(mu, L, k, m, delta)     # dictionnaire
         self._title = title
         self._labels = labels
+        self._symb = symb
 
     @property
-    def mu(self):
-        return self._mu
+    def params(self):
+        return self._params
 
-    @mu.setter
-    def mu(self, value):
-        self._mu = value
-
-    @property
-    def L(self):
-        return self._L
-
-    @L.setter
-    def L(self, value):
-        self._L = value
-
-    @property
-    def k(self):
-        return self._k
-
-    @k.setter
-    def k(self, value):
-        self._k = value
-
-    @property
-    def m(self):
-        return self._m
-
-    @m.setter
-    def m(self, value):
-        self._m = value
-
-    @property
-    def delta(self):
-        return self._delta
-
-    @delta.setter
-    def delta(self, value):
-        self._delta = value
+    @params.setter
+    def params(self, value):
+        self._params = value
 
     @property
     def title(self):
@@ -74,12 +41,24 @@ class Bacteries:
     def labels(self, value):
         self._labels = value
 
-    def __str__(self):
-        return f"""{self.title}
-        mu={self.mu}, L={self.L}, k={self.k}, m={self.m}, delta={self.delta}"""
+    @property
+    def symb(self):
+        return self._symb
+
+    @symb.setter
+    def symb(self, value):
+        self.symb = value
+
+    def make_params(self, mu, L, k, m, delta):
+        self.params = {lab: p for lab, p in zip(["mu", "L", "k", "m", "delta"],
+                                                [mu, L, k, m, delta])}
 
     def get_params(self):
-        return [self.mu, self.L, self.k, self.m, self.delta]
+        try:
+            return [self.params[p] for p in ["mu", "L", "k", "m", "delta"]]
+        except Exception:
+            print("Erreur : manque un paramètre")
+            return None
 
     def _rhs(self, z, t):
         S, X = z[0], z[1]

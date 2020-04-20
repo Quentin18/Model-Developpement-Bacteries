@@ -4,7 +4,6 @@ Modèle de développement des bactéries dans un substrat
 
 
 from mdl.model_bacteries import Bacteries
-from mdl.model_bacteries_2 import Bacteries_2
 from tools.axis import Axis
 from tools.cnds_initiales import Initials, Initial
 from tools.line_style_form import LineStyle, Color, Form
@@ -79,7 +78,7 @@ def mainSuperpose(mu, L, k, m, delta, phase_diag=True):
 
 def mainS0X0(mu=1, L=1, k=1, m=1, delta=1):
     # Le modèle
-    mdl = Bacteries_2({'mu': mu, 'L': L, 'k': k, 'm': m, 'delta': delta})
+    mdl = Bacteries(mu, L, k, m, delta)
     # Les axes
     taxis = Axis(0, 5, 500)
     # Couleurs et formes
@@ -99,7 +98,7 @@ def mainS0X0(mu=1, L=1, k=1, m=1, delta=1):
 
 def mainParams(mu=1, L=1, k=1, m=1, delta=1):
     # Le modèle
-    mdl = Bacteries_2({'mu': mu, 'L': L, 'k': k, 'm': m, 'delta': delta})
+    mdl = Bacteries(mu, L, k, m, delta)
     # Les axes
     taxis = Axis(0, 10, 500)
     # Couleurs et formes
@@ -121,7 +120,7 @@ def mainParams(mu=1, L=1, k=1, m=1, delta=1):
 
 def mainDynamic(mu=1, L=1, k=1, m=1, delta=1):
     # Le modèle
-    mdl = Bacteries_2({'mu': mu, 'L': L, 'k': k, 'm': m, 'delta': delta})
+    mdl = Bacteries(mu, L, k, m, delta)
     # Les axes
     xaxis = Axis(0, 5, 15j)
     yaxis = Axis(-5, 5, 15j)
@@ -139,8 +138,8 @@ def mainDynamic(mu=1, L=1, k=1, m=1, delta=1):
 
 
 if __name__ == "__main__":
-    # main(mu=1, L=1, k=1, m=1, delta=1, phase_diag=False)
-    # mainSuperpose(mu=1, L=1, k=1, m=1, delta=1, phase_diag=True)
+    main(mu=1, L=1, k=1, m=1, delta=1, phase_diag=False)
+    mainSuperpose(mu=1, L=1, k=1, m=1, delta=1, phase_diag=True)
     mainDynamic()
-    # mainS0X0()
-    # mainParams()
+    mainS0X0()
+    mainParams()
