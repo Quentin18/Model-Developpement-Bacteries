@@ -8,8 +8,8 @@ class Bacteries:
     """Gestion du modèle de développement des bactéries"""
     def __init__(self, mu, L, k, m, delta,
                  title="Développement des bactéries dans un substrat",
-                 labels=["Concentration de nourriture",
-                         "Concentration de bactéries"],
+                 labels=["Concentration de nourriture S",
+                         "Concentration de bactéries X"],
                  symb=["S", "X"]):
         self._params = None
         self.make_params(mu, L, k, m, delta)     # dictionnaire
@@ -75,3 +75,6 @@ class Bacteries:
         f = -(mu*S*X / (k + S + (S**2/L))) + delta*m*X
         g = (mu*S*X / (k + S + (S**2/L))) - m*X
         return [f, g]
+
+    def str_cndzr(self):
+        return f"({self.symb[0]}0, {self.symb[1]}0) = "
