@@ -32,7 +32,7 @@ class DynamicModel:
         self._figsize = value
 
     def __str__(self):
-        return self.title
+        return self.modl.title
 
     def plot(self, cndzr, stylebis, xaxis, yaxis, taxis,
              axcolor='lightgoldenrodyellow'):
