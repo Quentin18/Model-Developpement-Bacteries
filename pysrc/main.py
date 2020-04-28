@@ -74,12 +74,12 @@ def mainEvolParams(mu=0.5, L=0.5, k=0.5, m=0.5, delta=0.5, exprtpng=False):
                             cnds, xaxis, yaxis, taxis, exprtpng)
 
 
-def mainDynamic(mu=0.5, L=0.5, k=0.5, m=0.5, delta=0.5):
+def mainDynamic(mu=0.5, L=0.5, k=0.5, m=0.5, delta=0.5, inf=0, sup=2):
     # Le modèle
     mdl = Bacteries(mu, L, k, m, delta)
     # Les axes
     xaxis = Axis(0, 5, 15j)
-    yaxis = Axis(0, 4, 15j)
+    yaxis = Axis(0, 3, 15j)
     taxis = Axis(0, 5, 500)
     # Couleurs et formes
     col = Color()
@@ -90,7 +90,7 @@ def mainDynamic(mu=0.5, L=0.5, k=0.5, m=0.5, delta=0.5):
     cndzr = Initial((0.5, 0.5), red_solid)
     # Plot
     dymodel = DynamicModel(mdl)
-    dymodel.plot(cndzr, blue_dhdot, xaxis, yaxis, taxis)
+    dymodel.plot(cndzr, blue_dhdot, xaxis, yaxis, taxis, inf, sup)
 
 
 def mainS0X0(mu=1, L=1, k=1, m=1, delta=1):
@@ -136,8 +136,8 @@ def mainParams(mu=1, L=1, k=1, m=1, delta=1):
 
 
 if __name__ == "__main__":
-    mainModeleBasique()
-    mainEvolParams()
+    # mainModeleBasique()
+    # mainEvolParams()
     mainDynamic()
 
     # mainS0X0()

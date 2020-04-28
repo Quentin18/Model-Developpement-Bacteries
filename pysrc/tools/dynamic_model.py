@@ -34,7 +34,7 @@ class DynamicModel:
     def __str__(self):
         return self.modl.title
 
-    def plot(self, cndzr, stylebis, xaxis, yaxis, taxis,
+    def plot(self, cndzr, stylebis, xaxis, yaxis, taxis, inf, sup,
              axcolor='lightgoldenrodyellow'):
         """
         Affiche le modèle avec des sliders pour faire varier les paramètres
@@ -55,10 +55,10 @@ class DynamicModel:
         order = len(self.modl.symb)
         for s, axis in zip(self.modl.symb, axis_params[:order]):
             sliders[s + '0'] = Slider(
-                axis, s + '0', 0, 2, valinit=cnd0[self.modl.symb.index(s)])
+                axis, s + '0', inf, sup, valinit=cnd0[self.modl.symb.index(s)])
         # Paramètres
         for p, axis in zip(self.modl.params, axis_params[order:]):
-            sliders[p] = Slider(axis, p, 0, 2, valinit=self.modl.params[p])
+            sliders[p] = Slider(axis, p, inf, sup, valinit=self.modl.params[p])
 
         # Calcul des trajectoires
         tdisc = np.linspace(taxis.start, taxis.end, taxis.size_subdiv)
