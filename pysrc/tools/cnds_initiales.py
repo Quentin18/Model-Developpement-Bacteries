@@ -28,6 +28,9 @@ class Initial:
     def get_style(self):
         return self.param.get_lineStyle()
 
+    def __str__(self):
+        return "(" + ", ".join([str(c) for c in self.cords]) + ")"
+
 
 class Initials:
     """Gestion des conditions initiales"""
