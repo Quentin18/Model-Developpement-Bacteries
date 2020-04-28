@@ -53,16 +53,19 @@ class PhaseDiag:
         for cnd in cndszero:
             cnd0 = cnd.cords
             trj = odeint(modl.get_rhs(), cnd0, tdisc)
-            phases.plot(trj[:, 0], trj[:, 1], cnd.get_style())
+            phases.plot(trj[:, 0], trj[:, 1], cnd.get_style(),
+                        label=modl.str_cndzr() + str(cnd))
 
         # Champ des gradients
         if showfield:
             field = Field()
             field.plot(modl, xaxis, yaxis)
 
+        plt.legend()
+        plt.tight_layout()
         plt.show()
 
         if exprtpng:
-            figname = modl.title + ".png"
+            figname = self.title.lower() + ".png"
             figname = figname.replace(" ", "_")
             fig.savefig("img/" + figname)
