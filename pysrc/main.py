@@ -12,12 +12,12 @@ from tools.analysis import Analysis
 import numpy as np
 
 
-def mainModeleBasique(mdl, phase_diag=True, exprtpng=False):
+def mainModeleBasique(mdl, phase_diag=True, exprtpng=True):
     """Affiche le modèle de base"""
     # Les axes
-    xaxis = Axis(0, 5, 15j)
+    xaxis = Axis(0, 10, 15j)
     yaxis = Axis(0, 1, 15j)
-    taxis = Axis(0, 5, 500)
+    taxis = Axis(0, 10, 500)
     # Couleurs et formes
     col = Color()
     frm = Form()
@@ -43,12 +43,12 @@ def mainModeleBasique(mdl, phase_diag=True, exprtpng=False):
         phases.portrait(mdl, cnds, xaxis, yaxis, taxis, exprtpng)
 
 
-def mainEvolParams(mdl, exprtpng=False):
+def mainEvolParams(mdl, exprtpng=True):
     """Affiche l'impact des différents paramètres du modèle"""
     # Les axes
-    xaxis = Axis(0, 1, 15j)
+    xaxis = Axis(0, 10, 15j)
     yaxis = Axis(0, 1, 15j)
-    taxis = Axis(0, 1, 500)
+    taxis = Axis(0, 10, 500)
     # Couleurs et formes
     col = Color()
     frm = Form()
@@ -62,12 +62,20 @@ def mainEvolParams(mdl, exprtpng=False):
     cnds.append((0.75, 0.25), green_dotted)
     # Analyse
     ana = Analysis(mdl.title, figsize=(15, 9))
-    for p in ["mu", "L", "k", "m", "delta"]:
-        ana.plot_evol_param(mdl, p, [0, 0.25, 0.75, 1],
-                            cnds, xaxis, yaxis, taxis, exprtpng)
+    # for p in ["mu", "L", "k", "m", "delta"]:
+    ana.plot_evol_param(mdl, "mu", [0, 1, 2, 3],
+                        cnds, xaxis, yaxis, taxis, exprtpng)
+    ana.plot_evol_param(mdl, "L", [0.5, 1, 2, 3],
+                        cnds, xaxis, yaxis, taxis, exprtpng)
+    ana.plot_evol_param(mdl, "k", [0.5, 1, 2, 3],
+                        cnds, xaxis, yaxis, taxis, exprtpng)
+    ana.plot_evol_param(mdl, "m", [0, 1, 2, 3],
+                        cnds, xaxis, yaxis, taxis, exprtpng)
+    ana.plot_evol_param(mdl, "delta", [0, 0.25, 0.75, 1],
+                        cnds, xaxis, yaxis, taxis, exprtpng)
 
 
-def mainDynamic(inf=0, sup=2):
+def mainDynamic(inf=0, sup=3):
     """Affiche la fenêtre du modèle dynamique"""
     # Les axes
     xaxis = Axis(0, 5, 15j)
@@ -81,7 +89,7 @@ def mainDynamic(inf=0, sup=2):
     # Condition initiale
     cndzr = Initial((0.5, 0.5), red_solid)
     # Plot
-    mdl = Bacteries(mu=0.5, L=0.5, k=0.5, m=0.5, delta=0.5)
+    mdl = Bacteries(mu=2, L=1, k=0.5, m=0.5, delta=0.5)
     dymodel = DynamicModel(mdl)
     dymodel.plot(cndzr, blue_dhdot, xaxis, yaxis, taxis, inf, sup)
 
@@ -125,7 +133,7 @@ def mainParams(mdl):
 
 
 if __name__ == "__main__":
-    mdl = Bacteries(mu=0.5, L=0.5, k=0.5, m=0.5, delta=0.5)
+    mdl = Bacteries(mu=2, L=1, k=0.5, m=0.5, delta=0.5)
     mainDynamic()
     mainModeleBasique(mdl)
     mainEvolParams(mdl)

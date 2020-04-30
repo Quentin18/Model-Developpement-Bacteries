@@ -63,7 +63,7 @@ class Bacteries:
     def _rhs(self, z, t):
         S, X = z[0], z[1]
         mu, L, k, m, delta = self.get_params()
-        dSdt = -(mu*S*X / (k + S + (S**2/L))) + delta*m*X
+        dSdt = -(mu*S*X / (k + S + (S**2/L))) + (1 - delta)*m*X
         dXdt = (mu*S*X / (k + S + (S**2/L))) - m*X
         return [dSdt, dXdt]
 
@@ -72,7 +72,7 @@ class Bacteries:
 
     def get_field(self, S, X):
         mu, L, k, m, delta = self.get_params()
-        f = -(mu*S*X / (k + S + (S**2/L))) + delta*m*X
+        f = -(mu*S*X / (k + S + (S**2/L))) + (1 - delta)*m*X
         g = (mu*S*X / (k + S + (S**2/L))) - m*X
         return [f, g]
 
