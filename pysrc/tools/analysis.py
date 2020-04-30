@@ -76,7 +76,6 @@ class Analysis:
         Représente la variation de temps de croisement entre deux composantes
         en fonction des conditions initiales
         """
-
         # Calcul des trajectoires
         tdisc = np.linspace(taxis.start, taxis.end, taxis.size_subdiv)
         cndszero = cndszr.cnds
@@ -102,6 +101,7 @@ class Analysis:
         ax.set_title(
             f"""Temps de croisement entre {modl.symb[0]} et {modl.symb[1]}
             en fonction de {leg}""")
+        plt.grid(True)
         plt.show()
 
     def plot_param(self, modl, param, values, cndszr, taxis, epsilon):
@@ -148,6 +148,7 @@ class Analysis:
         ax.set_title(
             f"""Temps caractéristique de {label1} et {label2}
             en fonction de {param}""")
+        plt.grid(True)
         plt.show()
 
     def plot_diff(self, modl, param, values, cndszr, taxis, epsilon):
@@ -183,4 +184,5 @@ class Analysis:
         plt.tick_params(labelsize=8)
         ax.set_title(f"""Différence entre {label1} et {label2}
         en fonction de delta""")
+        plt.grid(True)
         plt.show()
