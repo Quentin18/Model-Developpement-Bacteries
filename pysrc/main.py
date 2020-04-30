@@ -1,8 +1,6 @@
 """
 Modèle de développement des bactéries dans un substrat
 """
-
-
 from mdl.model_bacteries import Bacteries
 from tools.axis import Axis
 from tools.cnds_initiales import Initials, Initial
@@ -14,11 +12,8 @@ from tools.analysis import Analysis
 import numpy as np
 
 
-def mainModeleBasique(mu=0.5, L=0.5, k=0.5, m=0.5, delta=0.5,
-                      phase_diag=True, exprtpng=False):
+def mainModeleBasique(mdl, phase_diag=True, exprtpng=False):
     """Affiche le modèle de base"""
-    # Le modèle
-    mdl = Bacteries(mu, L, k, m, delta)
     # Les axes
     xaxis = Axis(0, 5, 15j)
     yaxis = Axis(0, 1, 15j)
@@ -37,9 +32,9 @@ def mainModeleBasique(mu=0.5, L=0.5, k=0.5, m=0.5, delta=0.5,
     # Evolution
     evol = Evolution()
     # Graphes séparés
-    evol.plot(mdl, cnds, xaxis, [yaxis], taxis, exprtpng)
-    # Graphes superposés
     evol.plot(mdl, cnds, xaxis, [yaxis, yaxis], taxis, exprtpng)
+    # Graphes superposés
+    evol.plot(mdl, cnds, xaxis, [yaxis], taxis, exprtpng)
     if phase_diag:
         # Portrait des phases
         xaxis = Axis(0, 1, 15j)
@@ -48,10 +43,8 @@ def mainModeleBasique(mu=0.5, L=0.5, k=0.5, m=0.5, delta=0.5,
         phases.portrait(mdl, cnds, xaxis, yaxis, taxis, exprtpng)
 
 
-def mainEvolParams(mu=0.5, L=0.5, k=0.5, m=0.5, delta=0.5, exprtpng=False):
+def mainEvolParams(mdl, exprtpng=False):
     """Affiche l'impact des différents paramètres du modèle"""
-    # Le modèle
-    mdl = Bacteries(mu, L, k, m, delta)
     # Les axes
     xaxis = Axis(0, 1, 15j)
     yaxis = Axis(0, 1, 15j)
@@ -74,9 +67,8 @@ def mainEvolParams(mu=0.5, L=0.5, k=0.5, m=0.5, delta=0.5, exprtpng=False):
                             cnds, xaxis, yaxis, taxis, exprtpng)
 
 
-def mainDynamic(mu=0.5, L=0.5, k=0.5, m=0.5, delta=0.5, inf=0, sup=2):
-    # Le modèle
-    mdl = Bacteries(mu, L, k, m, delta)
+def mainDynamic(inf=0, sup=2):
+    """Affiche la fenêtre du modèle dynamique"""
     # Les axes
     xaxis = Axis(0, 5, 15j)
     yaxis = Axis(0, 3, 15j)
@@ -89,13 +81,12 @@ def mainDynamic(mu=0.5, L=0.5, k=0.5, m=0.5, delta=0.5, inf=0, sup=2):
     # Condition initiale
     cndzr = Initial((0.5, 0.5), red_solid)
     # Plot
+    mdl = Bacteries(mu=0.5, L=0.5, k=0.5, m=0.5, delta=0.5)
     dymodel = DynamicModel(mdl)
     dymodel.plot(cndzr, blue_dhdot, xaxis, yaxis, taxis, inf, sup)
 
 
-def mainS0X0(mu=1, L=1, k=1, m=1, delta=1):
-    # Le modèle
-    mdl = Bacteries(mu, L, k, m, delta)
+def mainS0X0(mdl):
     # Les axes
     taxis = Axis(0, 5, 500)
     # Couleurs et formes
@@ -113,11 +104,9 @@ def mainS0X0(mu=1, L=1, k=1, m=1, delta=1):
     evol.plot_cross(mdl, cnds, taxis, Lx, 'X0')
 
 
-def mainParams(mu=1, L=1, k=1, m=1, delta=1):
-    # Le modèle
-    mdl = Bacteries(mu, L, k, m, delta)
+def mainParams(mdl):
     # Les axes
-    taxis = Axis(0, 10, 500)
+    taxis = Axis(0, 5, 500)
     # Couleurs et formes
     col = Color()
     red_solid = LineStyle(col.red())
@@ -136,9 +125,9 @@ def mainParams(mu=1, L=1, k=1, m=1, delta=1):
 
 
 if __name__ == "__main__":
-    # mainModeleBasique()
-    # mainEvolParams()
+    mdl = Bacteries(mu=0.5, L=0.5, k=0.5, m=0.5, delta=0.5)
     mainDynamic()
-
-    # mainS0X0()
-    # mainParams()
+    mainModeleBasique(mdl)
+    mainEvolParams(mdl)
+    # mainS0X0(mdl)
+    # mainParams(mdl)
