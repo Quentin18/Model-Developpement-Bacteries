@@ -32,9 +32,11 @@ def mainModeleBasique(mdl, phase_diag=True, exprtpng=True):
     # Evolution
     evol = Evolution()
     # Graphes séparés
-    evol.plot(mdl, cnds, xaxis, [yaxis, yaxis], taxis, exprtpng)
+    evol.plot(mdl, cnds, xaxis, [yaxis, yaxis], taxis, "evol_model_separe",
+              exprtpng)
     # Graphes superposés
-    evol.plot(mdl, cnds, xaxis, [yaxis], taxis, exprtpng)
+    evol.plot(mdl, cnds, xaxis, [yaxis], taxis, "evol_model_superpose",
+              exprtpng)
     if phase_diag:
         # Portrait des phases
         xaxis = Axis(0, 1, 15j)
@@ -94,6 +96,59 @@ def mainDynamic(inf=0, sup=3):
     dymodel.plot(cndzr, blue_dhdot, xaxis, yaxis, taxis, inf, sup)
 
 
+def mainPointsCritiques(phase_diag=True, exprtpng=True):
+    """Etudie le modèle aux points critiques"""
+    # Les axes
+    xaxis = Axis(0, 10, 15j)
+    yaxis = Axis(0, 2, 15j)
+    taxis = Axis(0, 10, 500)
+    # Couleurs et formes
+    col = Color()
+    frm = Form()
+    red_solid = LineStyle(col.red())
+    blue_dhdot = LineStyle(col.blue(), frm.dash_dot())
+    green_dotted = LineStyle(col.green(), frm.dotted())
+    magenta_solid = LineStyle(col.magenta())
+
+    # Evolution
+    evol = Evolution()
+
+    # Conditions initiales
+    # Cas delta = 0
+    mu, L, k, m, delta = 2, 1, 0.5, 0.5, 0
+    cnds = Initials()
+    cnds.append((0.5, 0), red_solid)
+    cnds.append((((mu - m) - np.sqrt((m - mu)**2 - 4*m**2*k/L))*L/(2*m),
+                0.5), blue_dhdot)
+    cnds.append((((mu - m) + np.sqrt((m - mu)**2 - 4*m**2*k/L))*L/(2*m),
+                0.5), green_dotted)
+    cnds.append(((mu - m)*L / (2*m), 0.5), magenta_solid)
+    # Graphes
+    mdl = Bacteries(mu, L, k, m, delta)
+    evol.plot(mdl, cnds, xaxis, [yaxis, yaxis], taxis, "stabilite_delta",
+              exprtpng)
+
+    # Cas m = 0
+    mu, L, k, m, delta = 2, 1, 0.5, 0, 0.5
+    cnds = Initials()
+    cnds.append((0.5, 0.5), red_solid)
+    cnds.append((0, 0.5), blue_dhdot)
+    cnds.append((0.5, 0), green_dotted)
+    # Graphes
+    mdl = Bacteries(mu, L, k, m, delta)
+    evol.plot(mdl, cnds, xaxis, [yaxis, yaxis], taxis, "stabilite_m",
+              exprtpng)
+
+    # Cas X = 0
+    mu, L, k, m, delta = 2, 1, 0.5, 0.5, 0.5
+    cnds = Initials()
+    cnds.append((0.5, 0), red_solid)
+    # Graphes
+    mdl = Bacteries(mu, L, k, m, delta)
+    evol.plot(mdl, cnds, xaxis, [yaxis, yaxis], taxis, "stabilite_X",
+              exprtpng)
+
+
 def mainS0X0(mdl):
     # Les axes
     taxis = Axis(0, 5, 500)
@@ -133,9 +188,11 @@ def mainParams(mdl):
 
 
 if __name__ == "__main__":
-    mdl = Bacteries(mu=2, L=1, k=0.5, m=0.5, delta=0.5)
     mainDynamic()
+    mdl = Bacteries(mu=2, L=1, k=0.5, m=0.5, delta=0.5)
     mainModeleBasique(mdl)
     mainEvolParams(mdl)
+    mainPointsCritiques()
+
     # mainS0X0(mdl)
     # mainParams(mdl)

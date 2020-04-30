@@ -32,7 +32,8 @@ class Evolution:
     def __str__(self):
         return self.title
 
-    def plot(self, modl, cndszr, xaxis, yaxis, taxis, exprtpng=False):
+    def plot(self, modl, cndszr, xaxis, yaxis, taxis,
+             name="evol_model", exprtpng=False):
         """
         Représente les composantes du système différentiel
         en fonction du temps
@@ -79,8 +80,6 @@ class Evolution:
         plt.show()
 
         if exprtpng:
-            if superpose:
-                figname = "evol_model_superpose.png"
-            else:
-                figname = "evol_model_separe.png"
+            figname = name + ".png"
+            figname.replace(' ', '_')
             fig.savefig("img/" + figname)
