@@ -78,3 +78,6 @@ class Bacteries:
 
     def str_cndzr(self):
         return f"({self.symb[0]}0, {self.symb[1]}0) = "
+
+    def __str__(self):
+        return "Modèle de développement des bactéries"
