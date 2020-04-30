@@ -8,6 +8,7 @@ Ce projet comporte une classe pour générer une fenêtre dynamique, où on peut
 ## Graphes
 Il est possible de générer des graphes représentant l'évolution de S et X en fonction du temps, ainsi que de tracer le portrait de phases, c'est-à-dire S en fonction de X.
 ![](https://github.com/Quentin18/Model-Developpement-Bacteries/blob/master/pysrc/img/evol_model_separe.png)
+![](https://github.com/Quentin18/Model-Developpement-Bacteries/blob/master/pysrc/img/portrait_des_phases.png)
 
 <!-- ## Sources
 - https://www.sciencedirect.com/topics/engineering/monod-equation 
