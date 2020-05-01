@@ -14,35 +14,9 @@ rankdir=TB
 "10" [label="{LineStyle|color: string\lform: string\l|get_lineStyle()\l}", shape="record"];
 "11" [label="{PhaseDiag|figsize: tuple\ltitle: string\l|portrait(modl, cndszr, xaxis, yaxis, taxis, exprtpng, showfield)\l}", shape="record"];
 
-"0" -> "2"
-"0" -> "8"
-"0" -> "9"
-"0" -> "1"
-
-"4" -> "2"
-"4" -> "8"
 "4" -> "9"
-"4" -> "1"
-"4" -> "10"
 "4" -> "11"
-
-"5" -> "2"
-"5" -> "8"
-"5" -> "9"
-"5" -> "1"
-
 "6" -> "3"
-
-"8" -> "10"
-
 "9" -> "8"
-
-"10" -> "3"
-"10" -> "7"
-
-"11" -> "2"
-"11" -> "8"
-"11" -> "9"
-"11" -> "1"
 "11" -> "6"
 }
