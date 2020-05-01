@@ -1,0 +1,48 @@
+digraph "classes_model_bacteries" {
+charset="utf-8"
+rankdir=TB
+"0" [label="{Analysis|figsize: tuple\ltitle: string\l|plot_cross(modl, cndszr, taxis, ls, leg)\lplot_diff(modl, param, values, cndszr, taxis, epsilon)\lplot_evol_param(modl, param, values, cndszr, xaxis, yaxis, taxis, exprtpng)\lplot_param(modl, param, values, cndszr, taxis, epsilon)\l}", shape="record"];
+"1" [label="{Axis|end: int or float\llabel: string\lsize_subdiv: int or float\lstart: int or float\l|}", shape="record"];
+"2" [label="{Bacteries|labels: list or string (length = 2)\lparams: dict\lsymb: list of string (length = 2)\ltitle: string\l|get_field(S, X)\lget_params()\lget_rhs()\lmake_params(mu, L, k, m, delta)\lstr_cndzr()\l}", shape="record"];
+"3" [label="{Color|_colors: list\l|black()\lblue()\lcyan()\lgreen()\lmagenta()\lred()\lyellow()\l}", shape="record"];
+"4" [label="{DynamicModel|figsize: tuple\lmodl\l|plot(cndzr, stylebis, xaxis, yaxis, taxis, inf, sup, axcolor)\l}", shape="record"];
+"5" [label="{Evolution|figsize: tuple\ltitle: string\l|plot(modl, cndszr, xaxis, yaxis, taxis, name, exprtpng)\l}", shape="record"];
+"6" [label="{Field|params: dict\l|get_color()\lplot(modl, xaxis, yaxis)\l}", shape="record"];
+"7" [label="{Form|_forms: list\l|dash_dot()\ldashed()\ldotted()\lsolid()\l}", shape="record"];
+"8" [label="{Initial|cords: tuple\lparam: LineStyle\l|get_style()\l}", shape="record"];
+"9" [label="{Initials|cnds: list of Initial\l|append(cords, param)\lmake_initials(lx, ly, param)\l}", shape="record"];
+"10" [label="{LineStyle|color: string\lform: string\l|get_lineStyle()\l}", shape="record"];
+"11" [label="{PhaseDiag|figsize: tuple\ltitle: string\l|portrait(modl, cndszr, xaxis, yaxis, taxis, exprtpng, showfield)\l}", shape="record"];
+
+"0" -> "2"
+"0" -> "8"
+"0" -> "9"
+"0" -> "1"
+
+"4" -> "2"
+"4" -> "8"
+"4" -> "9"
+"4" -> "1"
+"4" -> "10"
+"4" -> "11"
+
+"5" -> "2"
+"5" -> "8"
+"5" -> "9"
+"5" -> "1"
+
+"6" -> "3"
+
+"8" -> "10"
+
+"9" -> "8"
+
+"10" -> "3"
+"10" -> "7"
+
+"11" -> "2"
+"11" -> "8"
+"11" -> "9"
+"11" -> "1"
+"11" -> "6"
+}
