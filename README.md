@@ -10,7 +10,3 @@ Il est possible de générer des graphes représentant l'évolution de S et X en
 ![](https://github.com/Quentin18/Model-Developpement-Bacteries/blob/master/pysrc/img/evol_model_separe.png)
 ![](https://github.com/Quentin18/Model-Developpement-Bacteries/blob/master/pysrc/img/evol_model_superpose.png)
 ![](https://github.com/Quentin18/Model-Developpement-Bacteries/blob/master/pysrc/img/portrait_des_phases.png)
-
-## Liens rapport Overleaf
-- Edition : https://fr.overleaf.com/1797316127bbdrhwwcvcdk
-- Visualisation : https://fr.overleaf.com/read/pyyjktncbbzw
