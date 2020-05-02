@@ -149,50 +149,9 @@ def mainPointsCritiques(phase_diag=True, exprtpng=True):
               exprtpng)
 
 
-def mainS0X0(mdl):
-    # Les axes
-    taxis = Axis(0, 5, 500)
-    # Couleurs et formes
-    col = Color()
-    red_solid = LineStyle(col.red())
-    Ls = [0, 0.1, 0.2, 0.3, 0.4, 0.5]
-    cnds = Initials()
-    cnds.make_initials(Ls, [0.5], red_solid)
-    # Analyse
-    evol = Analysis(mdl.title)
-    evol.plot_cross(mdl, cnds, taxis, Ls, 'S0')
-    Lx = [0.5, 0.6, 0.7, 0.8, 0.9, 1]
-    cnds = Initials()
-    cnds.make_initials([0.5], Lx, red_solid)
-    evol.plot_cross(mdl, cnds, taxis, Lx, 'X0')
-
-
-def mainParams(mdl):
-    # Les axes
-    taxis = Axis(0, 5, 500)
-    # Couleurs et formes
-    col = Color()
-    red_solid = LineStyle(col.red())
-    # Conditions initiales
-    cnds = Initials()
-    # Evolution
-    cnds.append((0.5, 0.5), red_solid)
-    cnds.append((0.25, 0.75), red_solid)
-    # Analyse
-    evol = Analysis(mdl.title)
-    epsilon = 0.001
-    evol.plot_param(mdl, "mu", np.arange(0, 1, 0.001), cnds, taxis, epsilon)
-    evol.plot_param(mdl, "L", np.arange(-1, 2, 0.001), cnds, taxis, epsilon)
-    evol.plot_param(mdl, "m", np.arange(-1, 2, 0.01), cnds, taxis, epsilon)
-    evol.plot_diff(mdl, "delta", np.arange(-2, 2, 0.01), cnds, taxis, epsilon)
-
-
 if __name__ == "__main__":
-    mainDynamic()
+    #mainDynamic()
     mdl = Bacteries(mu=2, L=1, k=0.5, m=0.5, delta=0.5)
     mainModeleBasique(mdl)
     mainEvolParams(mdl)
     mainPointsCritiques()
-
-    # mainS0X0(mdl)
-    # mainParams(mdl)
