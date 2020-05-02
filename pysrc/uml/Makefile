@@ -1,5 +1,8 @@
 uml:
 	pyreverse -o dot -p model_bacteries -A -S ..
 
-save:
-	dot -Tpng uml_diagram.dot -o uml_diagram.png
+png:
+	dot -Tpng uml.dot -o uml.png
+
+pdf:
+	dot -Tpdf uml.dot -o uml.pdf
