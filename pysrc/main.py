@@ -100,7 +100,7 @@ def mainPointsCritiques(phase_diag=True, exprtpng=True):
     """Etudie le modèle aux points critiques"""
     # Les axes
     xaxis = Axis(0, 10, 15j)
-    yaxis = Axis(0, 2, 15j)
+    yaxis = Axis(0, 3, 15j)
     taxis = Axis(0, 10, 500)
     # Couleurs et formes
     col = Color()
