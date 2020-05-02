@@ -1,7 +1,7 @@
 digraph "classes_model_bacteries" {
 charset="utf-8"
 rankdir=TB
-"0" [label="{Analysis|figsize: tuple\ltitle: string\l|plot_cross(modl, cndszr, taxis, ls, leg)\lplot_diff(modl, param, values, cndszr, taxis, epsilon)\lplot_evol_param(modl, param, values, cndszr, xaxis, yaxis, taxis, exprtpng)\lplot_param(modl, param, values, cndszr, taxis, epsilon)\l}", shape="record"];
+"0" [label="{Analysis|figsize: tuple\ltitle: string\lplot_param(modl, param, values, cndszr, taxis, epsilon)\l}", shape="record"];
 "1" [label="{Axis|end: int or float\llabel: string\lsize_subdiv: int or float\lstart: int or float\l|}", shape="record"];
 "2" [label="{Bacteries|labels: list or string (length = 2)\lparams: dict\lsymb: list of string (length = 2)\ltitle: string\l|get_field(S, X)\lget_params()\lget_rhs()\lmake_params(mu, L, k, m, delta)\lstr_cndzr()\l}", shape="record"];
 "3" [label="{Color|_colors: list\l|black()\lblue()\lcyan()\lgreen()\lmagenta()\lred()\lyellow()\l}", shape="record"];
